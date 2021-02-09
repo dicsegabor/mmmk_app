@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mmmk_app/widget/mainDrawer.dart';
 
 class ScreenTemplate extends StatelessWidget {
   final String title;
@@ -17,12 +18,15 @@ class ScreenTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          title,
+          style: Theme.of(context).appBarTheme.textTheme.headline1,
+        ),
         actions: [
-          if(actions != null) ...actions,
+          if (actions != null) ...actions,
         ],
       ),
-      drawer: showDrawer ? null : null,
+      drawer: showDrawer ? MainDrawer() : null,
       body: body,
     );
   }
