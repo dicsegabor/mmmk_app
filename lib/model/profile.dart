@@ -1,4 +1,5 @@
 class Profile {
+  String url;
   String telephone;
   String dormitory;
   int room;
@@ -7,6 +8,7 @@ class Profile {
   bool isHidden;
 
   Profile({
+    this.url,
     this.telephone,
     this.dormitory,
     this.room,
@@ -15,23 +17,42 @@ class Profile {
     this.isHidden,
   });
 
+  Profile.empty() {
+    url = "";
+    telephone = "";
+    dormitory = "";
+    room = 0;
+    faculty = "";
+    firstReservation = true;
+    isHidden = false;
+  }
+
   Profile.fromMap(Map<String, dynamic> data) {
-    telephone = data["telephone"];
-    dormitory = data["dormitory"];
-    room = data["room"];
-    faculty = data["faculty"];
-    firstReservation = data["firstReservation"];
-    isHidden = data["isHidden"];
+    url = data["url"] ?? "";
+    telephone = data["telephone"] ?? "";
+    dormitory = data["dormitory"] ?? "";
+    room = data["room"] ?? 0;
+    faculty = data["faculty"] ?? "";
+    firstReservation = data["firstReservation"] ?? true;
+    isHidden = data["isHidden"] ?? false;
   }
 
   Map<String, dynamic> toMap() {
     return {
-      "telephone": telephone,
-      "dormitory": dormitory,
-      "room": room,
-      "faculty": faculty,
-      "firstReservation": firstReservation,
-      "isHidden": isHidden,
+      "url": url ?? "",
+      "telephone": telephone ?? "",
+      "dormitory": dormitory ?? "",
+      "room": room ?? 0,
+      "faculty": faculty ?? "",
+      "firstReservation": firstReservation ?? true,
+      "isHidden": isHidden ?? false,
     };
+  }
+
+  bool contains(String searched) {
+    return telephone.toLowerCase().contains(searched.toLowerCase()) ||
+        dormitory.toLowerCase().contains(searched.toLowerCase()) ||
+        room.toString().toLowerCase().contains(searched.toLowerCase()) ||
+        faculty.toLowerCase().contains(searched.toLowerCase());
   }
 }

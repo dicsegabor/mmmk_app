@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
-import 'package:mmmk_app/model/user.dart';
+import 'package:mmmk_app/model/band.dart';
+import 'package:mmmk_app/widget/bandItem.dart';
 import 'package:mmmk_app/widget/loadingWidget.dart';
-import 'package:mmmk_app/widget/userItem.dart';
 
 import './screenTemplate.dart';
 
-class UsersScreen extends StatefulWidget {
-  static const routeName = "users";
+class BandsScreen extends StatefulWidget {
+  static const routeName = "bands";
 
   @override
-  _UsersScreenState createState() => _UsersScreenState();
+  _BandsScreenState createState() => _BandsScreenState();
 }
 
-class _UsersScreenState extends State<UsersScreen> {
+class _BandsScreenState extends State<BandsScreen> {
   String _searchedText = "";
-  List<User> _users = [];
+  List<Band> _bands = [];
   bool _isLoading = false;
   bool _isSearching = false;
 
@@ -24,21 +24,21 @@ class _UsersScreenState extends State<UsersScreen> {
   void initState() {
     Future.delayed(Duration.zero, () {
       setState(() => _isLoading = true);
-      _users = BlocProvider.of<AuthenticationBloc>(context).repository.users;
+      _bands = BlocProvider.of<AuthenticationBloc>(context).repository.bands;
       setState(() => _isLoading = false);
     });
 
     super.initState();
   }
 
-  List<User> get _filteredUsers => _searchedText.isEmpty
-      ? _users
-      : _users.where((element) => element.contains(_searchedText)).toList();
+  List<Band> get _filteredBands => _searchedText.isEmpty
+      ? _bands
+      : _bands.where((element) => element.contains(_searchedText)).toList();
 
   @override
   Widget build(BuildContext context) {
     return ScreenTemplate(
-      title: "Taglista",
+      title: "Zenekarlista",
       appBar: _isSearching
           ? AppBar(
               title: Padding(
@@ -72,9 +72,9 @@ class _UsersScreenState extends State<UsersScreen> {
           : Container(
               height: MediaQuery.of(context).size.height,
               child: ListView.builder(
-                itemCount: _filteredUsers.length,
+                itemCount: _filteredBands.length,
                 itemBuilder: (context, index) =>
-                    UserItem(_filteredUsers[index]),
+                    BandItem(_filteredBands[index]),
               ),
             ),
     );

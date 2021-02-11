@@ -18,8 +18,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async* {
     if (event is LoginButtonPressed) {
       yield LoginLoading();
-      // TODO: csak teszthez kellett
-      await Future.delayed(const Duration(seconds: 2), () => "2");
       try {
         //TODO: bejelentkezést megoldani, ha kész az api hozzá
         //await login(event.username, event.password);

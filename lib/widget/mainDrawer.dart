@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
+import 'package:mmmk_app/screen/bandsScreen.dart';
 import 'package:mmmk_app/screen/reservationsScreen.dart';
 import 'package:mmmk_app/screen/usersScreen.dart';
 import 'package:mmmk_app/widget/yesNoDialog.dart';
@@ -9,6 +10,7 @@ class MainDrawer extends StatelessWidget {
   final Map<String, String> _screenButtonsData = {
     "Foglalás": ReservationsScreen.routeName,
     "Tagok": UsersScreen.routeName,
+    "Zenekarok": BandsScreen.routeName,
   };
 
   Widget _buildDrawerButton({Function onPressed, String text}) {
@@ -71,7 +73,6 @@ class MainDrawer extends StatelessWidget {
               style: Theme.of(context).appBarTheme.textTheme.headline1,
             ),
           ),
-          // TODO: megcsinálni a gombokat
           body: Column(
             children: [
               ..._buildScreenButtons(context),

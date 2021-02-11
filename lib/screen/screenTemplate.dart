@@ -5,19 +5,23 @@ class ScreenTemplate extends StatelessWidget {
   final String title;
   final Widget body;
   final List<Widget> actions;
+  final AppBar appBar;
   final bool showDrawer;
 
-  const ScreenTemplate({
+  ScreenTemplate({
     @required this.title,
     @required this.body,
+    this.appBar,
     this.actions,
     this.showDrawer = true,
   });
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: appBar ?? AppBar(
         title: Text(
           title,
           style: Theme.of(context).appBarTheme.textTheme.headline1,

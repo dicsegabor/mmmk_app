@@ -33,8 +33,8 @@ class LoginForm extends StatelessWidget {
             ),
             TextFormField(
               decoration: InputDecoration(labelText: "Jelszó"),
-              validator: (value) =>
-                  value.length < 5 ? "A megadott jelszó túl rövid" : null,
+              //validator: (value) =>
+                //  value.length < 5 ? "A megadott jelszó túl rövid" : null,
               onSaved: (value) => loginData["password"] = value,
               obscureText: true,
             ),

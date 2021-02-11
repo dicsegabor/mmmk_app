@@ -9,23 +9,27 @@ class UserItem extends StatelessWidget {
 
   List<Widget> _buildExpanding(BuildContext context) {
     return [
+      if(_user.email.isNotEmpty)
       _buildMemberDetail(
         context: context,
         name: "Email",
         value: _user.email,
         onTap: _user.sendEmail,
       ),
+      if(_user.profile.telephone.isNotEmpty)
       _buildMemberDetail(
         context: context,
         name: "Telefon",
         value: _user.profile.telephone,
         onTap: _user.callPhone,
       ),
+      if(_user.profile.dormitory.isNotEmpty)
       _buildMemberDetail(
         context: context,
         name: "Kollégium",
         value: _user.profile.dormitory,
       ),
+      if(_user.profile.room > 0)
       _buildMemberDetail(
         context: context,
         name: "Szoba",
@@ -72,11 +76,10 @@ class UserItem extends StatelessWidget {
       child: ExpandablePanel(
         header: ListTile(
           title: Text(
-            "${_user.fullName} (${_user.username})",
-            style: Theme
-                .of(context)
-                .textTheme
-                .headline2,
+            _user.fullName == null
+                ? "${_user.username}"
+                : "${_user.fullName} (${_user.username})",
+            style: Theme.of(context).textTheme.headline2,
           ),
         ),
         expanded: Container(

@@ -2,19 +2,22 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:mmmk_app/model/apiModel.dart';
 import 'package:mmmk_app/model/user.dart';
-import 'package:mmmk_app/repo/userRepository.dart';
+import 'package:mmmk_app/repo/repository.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final UserRepository _userRepository;
+  Repository _repository;
+  ApiUser _currentUser;
 
-  AuthenticationBloc(this._userRepository) : super(AuthenticationUninitialized());
+  AuthenticationBloc(this._repository) : super(AuthenticationUninitialized());
 
-  UserRepository get userRepository => _userRepository;
+  Repository get repository => _repository;
+  ApiUser get currentUser => _currentUser;
 
   @override
   Stream<AuthenticationState> mapEventToState(
@@ -23,6 +26,7 @@ class AuthenticationBloc
       yield AuthenticationUninitialized();
     if (event is LoggedIn) {
       //TODO: bejelentkezést megoldani, ha kész az api hozzá
+      await _repository.fetchAndSetData("");
       yield AuthenticationAuthenticated();
     }
     if (event is LoggedOut)
