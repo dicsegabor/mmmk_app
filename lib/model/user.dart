@@ -1,8 +1,7 @@
-import 'package:mailto/mailto.dart';
 import 'package:mmmk_app/model/profile.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:mmmk_app/model/searchable.dart';
 
-class User {
+class User implements Searchable{
   String url;
   String username;
   String lastName;
@@ -18,8 +17,9 @@ class User {
       this.email,
       this.profile});
 
-  String get fullName =>
-      lastName != null && firstName != null ? "$lastName $firstName" : "";
+  String get fullName => firstName.isEmpty && lastName.isEmpty
+      ? "Nincs Nevem"
+      : "$lastName $firstName";
 
   User.empty() {
     url = "";
@@ -55,22 +55,5 @@ class User {
         fullName.toLowerCase().contains(searched.toLowerCase()) ||
         email.toLowerCase().contains(searched.toLowerCase()) ||
         profile.contains(searched);
-  }
-
-  Future<void> sendEmail() async {
-    final mailToLink = Mailto(to: [email]);
-    if (await canLaunch("$mailToLink")) {
-      await launch("$mailToLink");
-    } else {
-      throw "A kérést nem sikerült végrehajtani.";
-    }
-  }
-
-  Future<void> callPhone() async {
-    if (await canLaunch("tel://${profile.telephone}")) {
-      await launch("tel://${profile.telephone}");
-    } else {
-      throw "A kérést nem sikerült végrehajtani.";
-    }
   }
 }

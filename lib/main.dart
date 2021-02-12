@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
 import 'package:mmmk_app/bloc/login/login_bloc.dart';
-import 'package:mmmk_app/model/apiModel.dart';
-import 'package:mmmk_app/repo/repository.dart';
-import 'package:mmmk_app/screen/bandsScreen.dart';
+import 'package:mmmk_app/model/user.dart';
 import 'package:mmmk_app/screen/loadingScreen.dart';
 import 'package:mmmk_app/screen/loginScreen.dart';
 import 'package:mmmk_app/screen/reservationsScreen.dart';
-import 'package:mmmk_app/screen/usersScreen.dart';
+import 'package:mmmk_app/screen/searchableListScreen.dart';
+import 'package:mmmk_app/widget/bandItem.dart';
+import 'package:mmmk_app/widget/userItem.dart';
+
+import 'model/band.dart';
 
 void main() {
-  Repository userRepository = Repository();
-
   runApp(
     BlocProvider(
       create: (context) =>
-          AuthenticationBloc(userRepository)..add(AppStarted()),
+          AuthenticationBloc()..add(AppStarted()),
       child: MyApp(),
     ),
   );
@@ -72,8 +72,17 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         ReservationsScreen.routeName: (context) => ReservationsScreen(),
-        UsersScreen.routeName: (context) => UsersScreen(),
-        BandsScreen.routeName: (context) => BandsScreen(),
+        "users": (context) => SearchableListScreen<User>(
+              title: "Taglista",
+              list:
+                  BlocProvider.of<AuthenticationBloc>(context).repository.users,
+              builder: (data) => UserItem(data),
+            ),
+        "bands": (context) => SearchableListScreen<Band>(
+              title: "Zenekarlista",
+              list: BlocProvider.of<AuthenticationBloc>(context).repository.bands,
+              builder: (data) => BandItem(data),
+            ),
       },
     );
   }

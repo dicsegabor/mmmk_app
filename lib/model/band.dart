@@ -1,7 +1,6 @@
-import 'package:mailto/mailto.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:mmmk_app/model/searchable.dart';
 
-class Band {
+class Band implements Searchable {
   String name;
   String description;
   List<String> members = [];
@@ -40,22 +39,5 @@ class Band {
   bool contains(String searched){
     return name.toLowerCase().contains(searched.toLowerCase()) ||
         contactEmail.toLowerCase().contains(searched.toLowerCase());
-  }
-
-  Future<void> goToWebsite() async {
-    if (await canLaunch(website)) {
-      await launch(website);
-    } else {
-      throw "A kérést nem sikerült végrehajtani.";
-    }
-  }
-
-  Future<void> sendEmail() async {
-    final mailToLink = Mailto(to: [contactEmail]);
-    if (await canLaunch("$mailToLink")) {
-      await launch("$mailToLink");
-    } else {
-      throw "A kérést nem sikerült végrehajtani.";
-    }
   }
 }

@@ -2,7 +2,7 @@ class Profile {
   String url;
   String telephone;
   String dormitory;
-  int room;
+  String room;
   String faculty;
   bool firstReservation;
   bool isHidden;
@@ -21,7 +21,7 @@ class Profile {
     url = "";
     telephone = "";
     dormitory = "";
-    room = 0;
+    room = "";
     faculty = "";
     firstReservation = true;
     isHidden = false;
@@ -31,7 +31,7 @@ class Profile {
     url = data["url"] ?? "";
     telephone = data["telephone"] ?? "";
     dormitory = data["dormitory"] ?? "";
-    room = data["room"] ?? 0;
+    room = data["room"] == null ? "" : data["room"].toString();
     faculty = data["faculty"] ?? "";
     firstReservation = data["firstReservation"] ?? true;
     isHidden = data["isHidden"] ?? false;
@@ -42,7 +42,7 @@ class Profile {
       "url": url ?? "",
       "telephone": telephone ?? "",
       "dormitory": dormitory ?? "",
-      "room": room ?? 0,
+      "room": room ?? "",
       "faculty": faculty ?? "",
       "firstReservation": firstReservation ?? true,
       "isHidden": isHidden ?? false,

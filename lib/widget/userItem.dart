@@ -1,94 +1,38 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:mmmk_app/functions/generalFunctions.dart';
 import 'package:mmmk_app/model/user.dart';
+import 'package:mmmk_app/widget/ExpandableDetailList.dart';
+import 'package:mmmk_app/widget/expandingListItem.dart';
 
 class UserItem extends StatelessWidget {
   final User _user;
 
   const UserItem(this._user);
 
-  List<Widget> _buildExpanding(BuildContext context) {
-    return [
-      if(_user.email.isNotEmpty)
-      _buildMemberDetail(
-        context: context,
-        name: "Email",
-        value: _user.email,
-        onTap: _user.sendEmail,
-      ),
-      if(_user.profile.telephone.isNotEmpty)
-      _buildMemberDetail(
-        context: context,
-        name: "Telefon",
-        value: _user.profile.telephone,
-        onTap: _user.callPhone,
-      ),
-      if(_user.profile.dormitory.isNotEmpty)
-      _buildMemberDetail(
-        context: context,
-        name: "Kollégium",
-        value: _user.profile.dormitory,
-      ),
-      if(_user.profile.room > 0)
-      _buildMemberDetail(
-        context: context,
-        name: "Szoba",
-        value: _user.profile.room.toString(),
-      ),
-      /*if (_user.groups != null && _user.groups.isNotEmpty)
-        _buildMemberDetail(
-          context: context,
-          name: "Zenekarok",
-          value: "",
-        ),*/
-    ];
-  }
-
-  Widget _buildMemberDetail({
-    BuildContext context,
-    String name,
-    String value,
-    Function onTap,
-  }) =>
-      Column(
-        children: [
-          Container(
-            height: 40,
-            child: ListTile(
-              onTap: () => onTap().catchError((error) => Scaffold.of(context)
-                  .showSnackBar(SnackBar(content: Text(error.toString())))),
-              leading: Text(name),
-              trailing: Text(value),
-            ),
-          ),
-          Divider(height: 10),
-        ],
-      );
-
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.only(
-        top: 5,
-        left: 5,
-        right: 5,
-      ),
-      child: ExpandablePanel(
-        header: ListTile(
-          title: Text(
-            _user.fullName == null
-                ? "${_user.username}"
-                : "${_user.fullName} (${_user.username})",
-            style: Theme.of(context).textTheme.headline2,
-          ),
+    return ExpandableDetailList(
+      title: "${_user.fullName} (${_user.username})",
+      infoList: [
+        ExpandingListItem(
+          name: "Email",
+          value: _user.email,
+          onTap: () => sendEmail(_user.email),
         ),
-        expanded: Container(
-          height: _buildExpanding(context).length * 50.0,
-          child: Column(
-            children: _buildExpanding(context),
-          ),
+        ExpandingListItem(
+          name: "Telefon",
+          value: _user.profile.telephone,
+          onTap: () => callPhone(_user.profile.telephone),
         ),
-      ),
+        ExpandingListItem(
+          name: "Kollégium",
+          value: _user.profile.dormitory,
+        ),
+        ExpandingListItem(
+          name: "Szoba",
+          value: _user.profile.room.toString(),
+        ),
+      ],
     );
   }
 }

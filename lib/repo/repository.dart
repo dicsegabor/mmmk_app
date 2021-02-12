@@ -15,6 +15,7 @@ class Repository {
   List<User> get users => [..._users];
   List<Band> get bands => [..._bands];
 
+  //TODO: hibakezelés
   Future<void> fetchAndSetData(String token) async {
     _users = await fetchUsers(token);
     _bands = await fetchBands(token, _users);

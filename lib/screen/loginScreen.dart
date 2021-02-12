@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mmmk_app/bloc/login/login_bloc.dart';
 import 'package:mmmk_app/screen/screenTemplate.dart';
-import 'package:mmmk_app/widget/errorDialog.dart';
+import 'file:///C:/Users/Dell/Google%20Drive/Programming/Flutter/mmmk_app/lib/widget/dialogs/errorDialog.dart';
 import 'package:mmmk_app/widget/loadingWidget.dart';
 import 'package:mmmk_app/widget/loginForm.dart';
 
