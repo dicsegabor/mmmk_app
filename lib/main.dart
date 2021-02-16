@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
 import 'package:mmmk_app/bloc/login/login_bloc.dart';
-import 'package:mmmk_app/model/user.dart';
+import 'package:mmmk_app/repo/repository.dart';
+import 'package:mmmk_app/screen/bandsScreen.dart';
 import 'package:mmmk_app/screen/loadingScreen.dart';
 import 'package:mmmk_app/screen/loginScreen.dart';
 import 'package:mmmk_app/screen/reservationsScreen.dart';
 import 'package:mmmk_app/screen/searchableListScreen.dart';
+import 'package:mmmk_app/screen/usersScreen.dart';
 import 'package:mmmk_app/widget/bandItem.dart';
-import 'package:mmmk_app/widget/userItem.dart';
-
-import 'model/band.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
     BlocProvider(
-      create: (context) =>
-          AuthenticationBloc()..add(AppStarted()),
+      create: (context) => AuthenticationBloc()..add(AppStarted()),
       child: MyApp(),
     ),
   );
@@ -49,41 +48,35 @@ ThemeData generalTheme = ThemeData(
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: generalTheme.copyWith(brightness: Brightness.light),
-      darkTheme: generalTheme.copyWith(brightness: Brightness.dark),
-      themeMode: ThemeMode.system,
-      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        builder: (BuildContext context, state) {
-          if (state is AuthenticationUninitialized ||
-              state is AuthenticationUnauthenticated)
-            return BlocProvider(
-              create: (context) =>
-                  LoginBloc(BlocProvider.of<AuthenticationBloc>(context)),
-              child: LoginScreen(),
-            );
-          if (state is AuthenticationAuthenticated) return ReservationsScreen();
-          if (state is AuthenticationLoading)
-            return LoadingScreen();
-          else
-            return LoadingScreen();
+    return ChangeNotifierProvider.value(
+      value: BlocProvider.of<AuthenticationBloc>(context).repository,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: generalTheme.copyWith(brightness: Brightness.light),
+        darkTheme: generalTheme.copyWith(brightness: Brightness.dark),
+        themeMode: ThemeMode.system,
+        home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          builder: (BuildContext context, state) {
+            if (state is AuthenticationUninitialized ||
+                state is AuthenticationUnauthenticated)
+              return BlocProvider(
+                create: (context) =>
+                    LoginBloc(BlocProvider.of<AuthenticationBloc>(context)),
+                child: LoginScreen(),
+              );
+            if (state is AuthenticationAuthenticated) return ReservationsScreen();
+            if (state is AuthenticationLoading)
+              return LoadingScreen();
+            else
+              return LoadingScreen();
+          },
+        ),
+        routes: {
+          ReservationsScreen.routeName: (context) => ReservationsScreen(),
+          UsersScreen.routeName: (context) => UsersScreen(),
+          BandsScreen.routeName: (context) => BandsScreen(),
         },
       ),
-      routes: {
-        ReservationsScreen.routeName: (context) => ReservationsScreen(),
-        "users": (context) => SearchableListScreen(
-              title: "Taglista",
-              list:
-                  BlocProvider.of<AuthenticationBloc>(context).repository.users,
-              listItemBuilder: (data) => UserItem(data),
-            ),
-        "bands": (context) => SearchableListScreen(
-              title: "Zenekarlista",
-              list: BlocProvider.of<AuthenticationBloc>(context).repository.bands,
-              listItemBuilder: (data) => BandItem(data),
-            ),
-      },
     );
   }
 }

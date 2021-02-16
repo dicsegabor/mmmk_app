@@ -1,10 +1,7 @@
 import 'dart:convert';
 
-import 'package:mmmk_app/api/apiUrls.dart';
-import 'package:mmmk_app/model/apiModel.dart';
-
 import 'package:http/http.dart' as http;
-import 'package:mmmk_app/repo/repository.dart';
+import 'package:mmmk_app/api/apiUrls.dart';
 
 Future<void> login(String username, String password) async {
   try {

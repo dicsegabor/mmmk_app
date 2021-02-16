@@ -24,6 +24,7 @@ class LoginScreen extends StatelessWidget {
         },
       ),
       showDrawer: false,
+      showUserButton: false,
     );
   }
 }

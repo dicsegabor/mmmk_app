@@ -30,7 +30,8 @@ class AuthenticationBloc
     if (event is AppStarted) yield AuthenticationUninitialized();
     if (event is LoggedIn) {
       //TODO: bejelentkezést megoldani, ha kész az api hozzá
-      await _repository.fetchAndSetData("");
+      _currentUser = ApiUser("admin", Token("", Duration(hours: 1)));
+      await _repository.fetchAndSetAllData(_currentUser.token);
       yield AuthenticationAuthenticated();
     }
     if (event is LoggedOut) yield AuthenticationUnauthenticated();

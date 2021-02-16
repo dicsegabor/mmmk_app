@@ -2,7 +2,7 @@ class ApiUser{
   String _userName;
   Token _token;
 
-  String get userName => _userName;
+  String get username => _userName;
   String get token => _token.code;
 
   ApiUser(this._userName, this._token);

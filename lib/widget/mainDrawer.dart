@@ -4,11 +4,12 @@ import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
 import 'package:mmmk_app/screen/reservationsScreen.dart';
 
 import 'file:///C:/Users/Dell/Google%20Drive/Programming/Flutter/mmmk_app/lib/widget/dialogs/yesNoDialog.dart';
+import 'package:mmmk_app/screen/usersScreen.dart';
 
 class MainDrawer extends StatelessWidget {
   final Map<String, String> _screenButtonsData = {
     "Foglalás": ReservationsScreen.routeName,
-    "Tagok": "users",
+    "Tagok": UsersScreen.routeName,
     "Zenekarok": "bands",
   };
 
