@@ -72,16 +72,16 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         ReservationsScreen.routeName: (context) => ReservationsScreen(),
-        "users": (context) => SearchableListScreen<User>(
+        "users": (context) => SearchableListScreen(
               title: "Taglista",
               list:
                   BlocProvider.of<AuthenticationBloc>(context).repository.users,
-              builder: (data) => UserItem(data),
+              listItemBuilder: (data) => UserItem(data),
             ),
-        "bands": (context) => SearchableListScreen<Band>(
+        "bands": (context) => SearchableListScreen(
               title: "Zenekarlista",
               list: BlocProvider.of<AuthenticationBloc>(context).repository.bands,
-              builder: (data) => BandItem(data),
+              listItemBuilder: (data) => BandItem(data),
             ),
       },
     );

@@ -1,5 +1,5 @@
 import 'package:mmmk_app/model/profile.dart';
-import 'package:mmmk_app/model/searchable.dart';
+import 'file:///C:/Users/Dell/Google%20Drive/Programming/Flutter/mmmk_app/lib/model/interfaces/searchable.dart';
 
 class User implements Searchable{
   String url;

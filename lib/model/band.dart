@@ -1,6 +1,7 @@
-import 'package:mmmk_app/model/searchable.dart';
+import 'package:flutter/cupertino.dart';
+import 'file:///C:/Users/Dell/Google%20Drive/Programming/Flutter/mmmk_app/lib/model/interfaces/searchable.dart';
 
-class Band implements Searchable {
+class Band implements Searchable{
   String name;
   String description;
   List<String> members = [];

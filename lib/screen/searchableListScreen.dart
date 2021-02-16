@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
+import 'file:///C:/Users/Dell/Google%20Drive/Programming/Flutter/mmmk_app/lib/model/interfaces/searchable.dart';
 import 'package:mmmk_app/screen/screenTemplate.dart';
 import 'package:mmmk_app/widget/loadingWidget.dart';
 
-typedef ListItemBuilder<T> = Widget Function(T data);
+typedef ListItemBuilder = Widget Function(Searchable data);
 
-class SearchableListScreen<T> extends StatefulWidget {
+class SearchableListScreen extends StatefulWidget {
   final String title;
-  final List<T> list;
-  // TODO: kitalálni, hogy miért nem tehetem elé a <T>-t
-  final ListItemBuilder builder;
+  final List<Searchable> list;
+  final ListItemBuilder listItemBuilder;
 
-  // TODO: valahogy ellenőrizni, hogy Searchable-e
   SearchableListScreen({
     @required this.title,
     @required this.list,
-    @required this.builder,
+    @required this.listItemBuilder,
   });
 
   @override
-  _SearchableListScreenState createState() => _SearchableListScreenState<T>();
+  _SearchableListScreenState createState() => _SearchableListScreenState();
 }
 
-class _SearchableListScreenState<T> extends State<SearchableListScreen> {
+class _SearchableListScreenState extends State<SearchableListScreen> {
   String _searchedText = "";
-  List<T> _filteredList;
+  List<Searchable> _filteredList;
   bool _isLoading = false;
   bool _isSearching = false;
 
@@ -85,7 +84,7 @@ class _SearchableListScreenState<T> extends State<SearchableListScreen> {
               height: MediaQuery.of(context).size.height,
               child: ListView.builder(
                 itemCount: _filteredList.length,
-                itemBuilder: (context, index) => widget.builder(_filteredList[index]),
+                itemBuilder: (context, index) => widget.listItemBuilder(_filteredList[index]),
               ),
             ),
     );
