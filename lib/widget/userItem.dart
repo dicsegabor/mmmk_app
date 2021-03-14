@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mmmk_app/functions/generalFunctions.dart';
 import 'package:mmmk_app/model/user.dart';
-import 'package:mmmk_app/widget/ExpandableDetailList.dart';
+import 'package:mmmk_app/widget/expandableDetailList.dart';
 import 'package:mmmk_app/widget/expandingListItem.dart';
 
 class UserItem extends StatelessWidget {

@@ -7,3 +7,4 @@ const String loginUrl = "$apiUrl/login/";
 
 const String usersUrl = "$apiUrl/users/";
 const String bandsUrl = "$apiUrl/bands/";
+const String reservationsUrl = "http://127.0.0.1:3000/api/v1/reservations";

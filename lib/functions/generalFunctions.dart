@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 Future<void> goToWebsite(String website) async {
   if (await canLaunch(website)) {
@@ -24,4 +27,9 @@ Future<void> callPhone(String telephone) async {
   } else {
     throw "A kérést nem sikerült végrehajtani.";
   }
+}
+
+Future<bool> testUrl(String url) async {
+  final response = await http.get(url).timeout(Duration(seconds: 3));
+  return response.statusCode == 200;
 }

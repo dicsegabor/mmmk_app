@@ -29,13 +29,13 @@ class _SearchableListScreenState extends State<SearchableListScreen> {
 
   @override
   void initState() {
-    _filteredList = [...widget.list];
+    _filteredList = widget.list;
     super.initState();
   }
 
   void _setFilteredList() {
     _searchedText.isEmpty
-        ? setState(() => _filteredList = [...widget.list])
+        ? setState(() => _filteredList = widget.list)
         : setState(() => _filteredList = widget.list
             .where((element) => element.contains(_searchedText))
             .toList());
@@ -43,7 +43,7 @@ class _SearchableListScreenState extends State<SearchableListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _filteredList = [...widget.list];
+    _setFilteredList();
 
     return ScreenTemplate(
       title: widget.title,
@@ -55,22 +55,16 @@ class _SearchableListScreenState extends State<SearchableListScreen> {
                   autofocus: true,
                   decoration: InputDecoration(labelText: "Keresés"),
                   textInputAction: TextInputAction.search,
-                  onChanged: (value) => setState(() {
-                    _searchedText = value;
-                    _setFilteredList();
-                  }),
+                  onChanged: (value) => setState(() => _searchedText = value),
                 ),
               ),
               actions: [
                 IconButton(
                   icon: Icon(Icons.close),
-                  onPressed: () {
-                    setState(() {
-                      _searchedText = "";
-                      _setFilteredList();
-                      _isSearching = false;
-                    });
-                  },
+                  onPressed: () => setState(() {
+                    _searchedText = "";
+                    _isSearching = false;
+                  }),
                 ),
               ],
             )
@@ -81,6 +75,7 @@ class _SearchableListScreenState extends State<SearchableListScreen> {
           onPressed: () => setState(() => _isSearching = true),
         ),
       ],
+      showDrawer: !_isSearching,
       body: RefreshIndicator(
         onRefresh: () async => widget.onRefresh(),
         child: Container(

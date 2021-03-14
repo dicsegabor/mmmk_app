@@ -7,7 +7,6 @@ import 'package:mmmk_app/widget/loadingWidget.dart';
 import 'package:mmmk_app/widget/loginForm.dart';
 
 class LoginScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return ScreenTemplate(

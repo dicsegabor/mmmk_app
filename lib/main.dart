@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
 import 'package:mmmk_app/bloc/login/login_bloc.dart';
-import 'package:mmmk_app/repo/repository.dart';
 import 'package:mmmk_app/screen/bandsScreen.dart';
 import 'package:mmmk_app/screen/loadingScreen.dart';
 import 'package:mmmk_app/screen/loginScreen.dart';
 import 'package:mmmk_app/screen/reservationsScreen.dart';
-import 'package:mmmk_app/screen/searchableListScreen.dart';
+import 'package:mmmk_app/screen/userDataScreen.dart';
 import 'package:mmmk_app/screen/usersScreen.dart';
-import 'package:mmmk_app/widget/bandItem.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(
     BlocProvider(
       create: (context) => AuthenticationBloc()..add(AppStarted()),
@@ -43,6 +48,11 @@ ThemeData generalTheme = ThemeData(
       ),
     ),
   ),
+  snackBarTheme: SnackBarThemeData(
+    contentTextStyle: TextStyle(
+      color: Colors.black,
+    ),
+  ),
 );
 
 class MyApp extends StatelessWidget {
@@ -64,7 +74,8 @@ class MyApp extends StatelessWidget {
                     LoginBloc(BlocProvider.of<AuthenticationBloc>(context)),
                 child: LoginScreen(),
               );
-            if (state is AuthenticationAuthenticated) return ReservationsScreen();
+            if (state is AuthenticationAuthenticated)
+              return ReservationsScreen();
             if (state is AuthenticationLoading)
               return LoadingScreen();
             else
@@ -75,6 +86,7 @@ class MyApp extends StatelessWidget {
           ReservationsScreen.routeName: (context) => ReservationsScreen(),
           UsersScreen.routeName: (context) => UsersScreen(),
           BandsScreen.routeName: (context) => BandsScreen(),
+          UserDataScreen.routeName: (context) => UserDataScreen(),
         },
       ),
     );

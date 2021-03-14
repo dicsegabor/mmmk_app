@@ -20,7 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginLoading();
       try {
         //TODO: bejelentkezést megoldani, ha kész az api hozzá
-        //await login(event.username, event.password);
+        //await login(event.username, event.password).timeout(Duration(seconds: 10));
         authenticationBloc.add(LoggedIn(user: null));
       } catch (error) {
         yield LoginFailure(message: error.message);

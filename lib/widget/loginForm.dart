@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mmmk_app/bloc/login/login_bloc.dart';
+import 'package:mmmk_app/widget/formTemplate.dart';
 
 class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -20,34 +21,23 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextFormField(
-              decoration: InputDecoration(labelText: "Felhasználónév"),
-              onSaved: (value) => loginData["username"] = value,
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: "Jelszó"),
-              //validator: (value) =>
-                //  value.length < 5 ? "A megadott jelszó túl rövid" : null,
-              onSaved: (value) => loginData["password"] = value,
-              obscureText: true,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            RaisedButton(
-              onPressed: () => _saveForm(context),
-              child: Text("Bejelentkezés"),
-            ),
-          ],
+    return FormTemplate(
+      formKey: _formKey,
+      formFields: [
+        TextFormField(
+          decoration: InputDecoration(labelText: "Felhasználónév"),
+          onSaved: (value) => loginData["username"] = value,
         ),
-      ),
+        TextFormField(
+          decoration: InputDecoration(labelText: "Jelszó"),
+          //validator: (value) =>
+          //  value.length < 5 ? "A megadott jelszó túl rövid" : null,
+          onSaved: (value) => loginData["password"] = value,
+          obscureText: true,
+        ),
+      ],
+      submitText: "Bejelentkezés",
+      onSubmit: () => _saveForm(context),
     );
   }
 }

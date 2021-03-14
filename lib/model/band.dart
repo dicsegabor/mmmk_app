@@ -1,4 +1,7 @@
 
+
+import 'package:mmmk_app/functions/generalFunctions.dart';
+
 import 'interfaces/searchable.dart';
 
 class Band implements Searchable{
@@ -21,7 +24,7 @@ class Band implements Searchable{
   Band.fromMap(Map<String, dynamic> data){
     name = data["name"] ?? "";
     description = data["description"] ?? "";
-    logoUrl = data["logoUrl"] ?? "";
+    logoUrl = data["logourl"] ?? "";
     contactEmail = data["contactemail"] ?? "";
     website = data["website"] ?? "";
   }

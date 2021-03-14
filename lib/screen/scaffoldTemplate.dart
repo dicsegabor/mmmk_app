@@ -4,7 +4,7 @@ import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
 import 'package:mmmk_app/screen/userDataScreen.dart';
 import 'package:mmmk_app/widget/mainDrawer.dart';
 
-class ScreenTemplate extends StatelessWidget {
+class ScaffoldTemplate extends StatelessWidget {
   final String title;
   final Widget body;
   final List<Widget> actions;
@@ -12,8 +12,8 @@ class ScreenTemplate extends StatelessWidget {
   final bool showDrawer;
   final bool showUserButton;
 
-  ScreenTemplate({
-    this.title,
+  ScaffoldTemplate({
+    @required this.title,
     @required this.body,
     this.appBar,
     this.actions,

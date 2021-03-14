@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:mmmk_app/functions/generalFunctions.dart';
 import 'package:mmmk_app/model/band.dart';
-import 'package:mmmk_app/widget/ExpandableDetailList.dart';
+import 'package:mmmk_app/widget/badDescriptionScreen.dart';
 import 'package:mmmk_app/widget/dialogs/infoDialog.dart';
+import 'package:mmmk_app/widget/expandableDetailList.dart';
 import 'package:mmmk_app/widget/expandingListItem.dart';
 
 class BandItem extends StatelessWidget {
@@ -21,14 +23,15 @@ class BandItem extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 20,
             ),
           ),
+          Divider(height: 10),
           if (_band.members != null && _band.members.isNotEmpty)
             Container(
               child: _buildDoubleColumn(_band.members),
             ),
-          Divider(),
+          Divider(height: 10),
         ],
       ),
     );
@@ -55,71 +58,77 @@ class BandItem extends StatelessWidget {
       i % 2 == 0 ? left.add(text) : right.add(text);
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            children: [...left],
-          ),
-          Column(
-            children: [...right],
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          children: [...left],
+        ),
+        Column(
+          children: [...right],
+        ),
+      ],
     );
   }
 
-  Widget _getBandLogo(BuildContext context) {
-    // Url matcher
-    //RegExp regExp = RegExp(r"(https?:\/\/.*\.(?:png|jpg|jpeg|gif|tiff))");
-    //Iterable<Match> matches = regExp.allMatches(_band.logoUrl);
+  Future<Widget> _getBandLogo(BuildContext context) async {
+    String url = _band.logoUrl;
 
     try {
-      if (_band.logoUrl == null || _band.logoUrl.isEmpty) throw Exception();
-      return CircleAvatar(backgroundImage: NetworkImage(_band.logoUrl));
+      if (url == null || url.isEmpty) throw Exception("Nincs megadott url!");
+      if (await testUrl(url))
+        return CircleAvatar(backgroundImage: NetworkImage(url));
     } catch (error) {
-      return CircleAvatar(
-        child: Text(
-          _band.name.substring(0, 1).toUpperCase(),
-          style: Theme.of(context).textTheme.headline2,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-      );
+      // print(error.toString());
     }
+    return CircleAvatar(
+      child: Text(
+        _band.name.substring(0, 1).toUpperCase(),
+        style: Theme.of(context).textTheme.headline2,
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    double membersDetailHeight = (_band.members.length / 2) * 35.0;
+    // Cím + 2 divider + tagok
+    double membersDetailHeight = 40 + (_band.members.length / 2) * 26.0;
 
-    return ExpandableDetailList(
-      leading: _getBandLogo(context),
-      title: _band.name,
-      other: _buildMembersDetail(membersDetailHeight),
-      otherHeight: membersDetailHeight,
-      infoList: [
-        ExpandingListItem(
-          name: "E-mail",
-          value: _band.contactEmail,
-          onTap: () => sendEmail(_band.contactEmail),
-        ),
-        ExpandingListItem(
-          name: "Weboldal",
-          value: "Tovább a weboldalra",
-          onTap: () => goToWebsite(_band.website),
-        ),
-        ExpandingListItem(
-          name: "Leírás",
-          value: "Tovább a leíráshoz",
-          onTap: () => InfoDialog(
-            title: "Leírás",
-            content: _band.description,
-          ).show(context),
-        ),
-      ],
+    return FutureBuilder(
+      future: _getBandLogo(context),
+      builder: (context, dataSnapshot) => ExpandableDetailList(
+        leading: dataSnapshot.connectionState == ConnectionState.waiting
+            ? CircularProgressIndicator()
+            : dataSnapshot.data,
+        title: _band.name,
+        other: _buildMembersDetail(membersDetailHeight),
+        otherHeight: membersDetailHeight,
+        infoList: [
+          ExpandingListItem(
+            name: "E-mail",
+            value: _band.contactEmail,
+            onTap: () => sendEmail(_band.contactEmail),
+          ),
+          ExpandingListItem(
+            name: "Weboldal",
+            value: "Tovább a weboldalra",
+            onTap: () => goToWebsite(_band.website),
+          ),
+          ExpandingListItem(
+            name: "Leírás",
+            value: "Tovább a leíráshoz",
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (context) => BandDescriptionScreen(
+                        bandName: _band.name,
+                        description: _band.description,
+                      )),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
