@@ -16,7 +16,7 @@ class ErrorDialog {
         title: Text(title),
         content: content.isEmpty ? null : Text(content),
         actions: [
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               Navigator.of(context).pop();
             },

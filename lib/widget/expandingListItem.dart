@@ -20,7 +20,7 @@ class ExpandingListItem extends StatelessWidget {
           child: ListTile(
             onTap: onTap == null
                 ? null
-                : () => onTap().catchError((error) => Scaffold.of(context)
+                : () => onTap().catchError((error) => ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(error.toString())))),
             leading: Text(
               name,

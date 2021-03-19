@@ -23,7 +23,7 @@ class EditUserDataForm extends StatelessWidget {
       Provider.of<Repository>(context).fetchAndSetUsers(
           BlocProvider.of<AuthenticationBloc>(context).currentUser.token);
     } catch (error) {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             "Sikertelen mentés",
@@ -32,7 +32,7 @@ class EditUserDataForm extends StatelessWidget {
         ),
       );
     }
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           "Sikeres mentés",

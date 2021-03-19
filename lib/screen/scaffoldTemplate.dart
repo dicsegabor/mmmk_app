@@ -33,7 +33,7 @@ class ScaffoldTemplate extends StatelessWidget {
             actions: [
               if (actions != null) ...actions,
               if (showUserButton)
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () => Navigator.of(context).pushNamed(UserDataScreen.routeName),
                   child: Text(BlocProvider.of<AuthenticationBloc>(context).currentUser.username),
                 ),

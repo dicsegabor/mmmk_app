@@ -14,7 +14,7 @@ class ChangeEmailForm extends StatelessWidget {
     try {
       //TODO: Email megváltoztatásának megoldása
     } catch (error) {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             "Sikertelen mentés",
@@ -23,7 +23,7 @@ class ChangeEmailForm extends StatelessWidget {
         ),
       );
     }
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           "Sikeres mentés",

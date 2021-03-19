@@ -33,7 +33,7 @@ class FormTemplate extends StatelessWidget {
               ),
               ...formFields,
               SizedBox(height: 20),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () => onSubmit(),
                 child: Text(submitText),
               ),

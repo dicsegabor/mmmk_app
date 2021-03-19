@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
 import 'package:mmmk_app/screen/reservationsScreen.dart';
 
-import 'file:///C:/Users/Dell/Google%20Drive/Programming/Flutter/mmmk_app/lib/widget/dialogs/yesNoDialog.dart';
 import 'package:mmmk_app/screen/usersScreen.dart';
+
+import 'dialogs/yesNoDialog.dart';
 
 class MainDrawer extends StatelessWidget {
   final Map<String, String> _screenButtonsData = {
@@ -18,7 +19,7 @@ class MainDrawer extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          child: FlatButton(
+          child: TextButton(
             onPressed: onPressed,
             child: Text(
               text,

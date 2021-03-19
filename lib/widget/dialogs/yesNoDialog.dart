@@ -21,11 +21,11 @@ class YesNoDialog {
         title: Text(title),
         content: content.isEmpty ? null : Text(content),
         actions: [
-          RaisedButton(
+          ElevatedButton(
             onPressed: () => Navigator.of(context).pop(DialogResult.YES),
             child: Text("Igen"),
           ),
-          FlatButton(
+          TextButton(
             onPressed: () => Navigator.of(context).pop(DialogResult.NO),
             child: Text("Nem"),
           ),

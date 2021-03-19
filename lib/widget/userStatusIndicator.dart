@@ -67,7 +67,7 @@ class _UserStatusIndicatorState extends State<UserStatusIndicator> {
       case PeriodState.PENDING:
         return _buildPeriodStateButton(
           onPressed: () {
-            Scaffold.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text("A jelentkezésed elfogadásra vár."),
               duration: Duration(seconds: 2),
             ));
@@ -81,7 +81,7 @@ class _UserStatusIndicatorState extends State<UserStatusIndicator> {
       case PeriodState.ACTIVE:
         return _buildPeriodStateButton(
           onPressed: () {
-            Scaffold.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text("A jelentkezésed elfogadtuk."),
               duration: Duration(seconds: 2),
             ));
@@ -95,7 +95,7 @@ class _UserStatusIndicatorState extends State<UserStatusIndicator> {
       default:
         return _buildPeriodStateButton(
           onPressed: () {
-            Scaffold.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text("Sajnos nem tudtuk lekérdezni a státuszodat."),
               duration: Duration(seconds: 2),
             ));

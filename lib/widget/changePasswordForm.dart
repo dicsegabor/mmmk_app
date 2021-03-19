@@ -21,7 +21,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
     try {
       //TODO: Jelszó megváltoztatásának megoldása
     } catch (error) {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             "Sikertelen mentés",
@@ -30,7 +30,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
         ),
       );
     }
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           "Sikeres mentés",
@@ -67,7 +67,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
           textInputAction: TextInputAction.done,
           obscureText: obscureText,
         ),
-        FlatButton(
+        TextButton(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
