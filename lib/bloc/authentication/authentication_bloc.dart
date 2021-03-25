@@ -39,8 +39,6 @@ class AuthenticationBloc
         yield AuthenticationAuthenticated();
       } catch (error) {
         print(error);
-        //TODO: ezt innen kivenni
-        yield AuthenticationAuthenticated();
       }
     }
     if (event is LoggedOut) yield AuthenticationUnauthenticated();

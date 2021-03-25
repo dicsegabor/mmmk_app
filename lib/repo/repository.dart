@@ -28,6 +28,7 @@ class Repository with ChangeNotifier {
   }
 
   //TODO: hibakezelés
+  //TODO: remove
   Future<void> fetchAndSetAllData(String token) async {
     try {
       //_users = await fetchUsers(token).timeout(Duration(seconds: 10));

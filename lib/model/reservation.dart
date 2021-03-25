@@ -16,4 +16,7 @@ class Reservation {
     title = data["title"];
     color = Colors.green;
   }
+  
+  /// Use DateTime.weekday for it
+  bool isOnThisWeekDay(int day) => start.weekday == day;
 }

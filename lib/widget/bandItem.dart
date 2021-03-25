@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:mmmk_app/functions/generalFunctions.dart';
 import 'package:mmmk_app/model/band.dart';
 import 'package:mmmk_app/widget/badDescriptionScreen.dart';
-import 'package:mmmk_app/widget/dialogs/infoDialog.dart';
 import 'package:mmmk_app/widget/expandableDetailList.dart';
 import 'package:mmmk_app/widget/expandingListItem.dart';
 
