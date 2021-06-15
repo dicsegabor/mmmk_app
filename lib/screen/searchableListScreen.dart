@@ -83,9 +83,9 @@ class _SearchableListScreenState extends State<SearchableListScreen> {
           child: ListView.builder(
             itemCount: _filteredList.length,
             itemBuilder: (context, index) => widget.listItemBuilder(
-                _filteredList[index],
-                ValueKey(_filteredList[index].toString())),
-          ),
+                    _filteredList[index],
+                    ValueKey(DateTime.now()),
+                  )),
         ),
       ),
     );

@@ -31,10 +31,10 @@ class Repository with ChangeNotifier {
   //TODO: remove
   Future<void> fetchAndSetAllData(String token) async {
     try {
-      _users = await fetchUsers(token).timeout(Duration(seconds: 10));
-      _bands = await fetchBands(token, _users).timeout(Duration(seconds: 10));
-      //_reservations =
-      await fetchReservations(token).timeout(Duration(seconds: 10));
+      _users = await fetchUsers(token).timeout(Duration(seconds: 5));
+      _bands = await fetchBands(token, _users).timeout(Duration(seconds: 5));
+      _reservations =
+          await fetchReservations(token).timeout(Duration(seconds: 5));
     } catch (error) {
       throw error;
     }

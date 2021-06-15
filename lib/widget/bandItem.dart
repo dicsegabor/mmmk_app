@@ -12,7 +12,6 @@ class BandItem extends StatelessWidget {
 
   Widget _buildMembersDetail(double height) {
     return Container(
-      key: ValueKey(_band.name),
       height: height,
       child: Column(
         children: [
