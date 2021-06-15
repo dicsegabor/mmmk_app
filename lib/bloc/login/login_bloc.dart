@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:mmmk_app/api/authenticationApi.dart';
 import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
 
 part 'login_event.dart';
@@ -19,11 +20,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginButtonPressed) {
       yield LoginLoading();
       try {
-        //TODO: bejelentkezést megoldani, ha kész az api hozzá
-        //await login(event.username, event.password).timeout(Duration(seconds: 10));
-        authenticationBloc.add(LoggedIn(user: null));
+        final token = await login(event.username, event.password)
+            .timeout(Duration(seconds: 10));
+        authenticationBloc.add(LoggedIn(user: null, token: "Token $token"));
       } catch (error) {
-        yield LoginFailure(message: error.message);
+        yield LoginFailure(message: error.toString());
         yield LoginInitial();
       }
     }

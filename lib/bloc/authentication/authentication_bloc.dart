@@ -5,10 +5,8 @@ import 'package:meta/meta.dart';
 import 'package:mmmk_app/model/apiModel.dart';
 import 'package:mmmk_app/model/user.dart';
 import 'package:mmmk_app/repo/repository.dart';
-import 'package:mmmk_app/widget/dialogs/errorDialog.dart';
 
 part 'authentication_event.dart';
-
 part 'authentication_state.dart';
 
 class AuthenticationBloc
@@ -30,9 +28,8 @@ class AuthenticationBloc
   ) async* {
     if (event is AppStarted) yield AuthenticationUninitialized();
     if (event is LoggedIn) {
-      //TODO: bejelentkezést megoldani, ha kész az api hozzá
       try {
-        _currentUser = ApiUser("admin", Token("", Duration(hours: 1)));
+        _currentUser = ApiUser("admin", Token(event.token, Duration(hours: 1)));
         await _repository
             .fetchAndSetAllData(_currentUser.token)
             .timeout(Duration(seconds: 10));

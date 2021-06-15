@@ -14,7 +14,7 @@ class ErrorDialog {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(title),
-        content: content.isEmpty ? null : Text(content),
+        content: content == null || content.isEmpty ? null : Text(content),
         actions: [
           ElevatedButton(
             onPressed: () {

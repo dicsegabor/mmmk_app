@@ -27,7 +27,7 @@ class ScreenTemplate extends StatelessWidget {
       appBar: appBar ??
           AppBar(
             title: Text(
-              title,
+              title ?? "Template",
               style: Theme.of(context).appBarTheme.textTheme.headline1,
             ),
             actions: [

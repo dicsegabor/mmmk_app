@@ -14,9 +14,12 @@ class UsersScreen extends StatelessWidget {
     return SearchableListScreen(
       title: "Tagok",
       list: Provider.of<Repository>(context).users,
-      listItemBuilder: (data) => UserItem(data),
-      onRefresh: () => Provider.of<Repository>(context, listen: false).fetchAndSetUsers(
-          BlocProvider.of<AuthenticationBloc>(context, listen: false).currentUser.token),
+      listItemBuilder: (data, key) => UserItem(data, key: key),
+      onRefresh: () => Provider.of<Repository>(context, listen: false)
+          .fetchAndSetUsers(
+              BlocProvider.of<AuthenticationBloc>(context, listen: false)
+                  .currentUser
+                  .token),
     );
   }
 }

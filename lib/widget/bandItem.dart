@@ -8,7 +8,7 @@ import 'package:mmmk_app/widget/expandingListItem.dart';
 class BandItem extends StatelessWidget {
   final Band _band;
 
-  BandItem(this._band);
+  BandItem(this._band, {Key key}) : super(key: key);
 
   Widget _buildMembersDetail(double height) {
     return Container(

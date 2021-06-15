@@ -7,7 +7,7 @@ class ExpandingListItem extends StatelessWidget {
 
   const ExpandingListItem({
     @required this.name,
-    this.value,
+    this.value = '',
     this.onTap,
   });
 
@@ -20,8 +20,9 @@ class ExpandingListItem extends StatelessWidget {
           child: ListTile(
             onTap: onTap == null
                 ? null
-                : () => onTap().catchError((error) => ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(error.toString())))),
+                : () => onTap().catchError((error) =>
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(error.toString())))),
             leading: Text(
               name,
               style: TextStyle(
@@ -29,9 +30,15 @@ class ExpandingListItem extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            trailing: Text(
-              value,
-              style: TextStyle(fontSize: 16),
+            trailing: Container(
+              width: 200,
+              child: Text(
+                value,
+                style: TextStyle(fontSize: 16),
+                overflow: TextOverflow.clip,
+                maxLines: 1,
+                textAlign: TextAlign.right,
+              ),
             ),
           ),
         ),

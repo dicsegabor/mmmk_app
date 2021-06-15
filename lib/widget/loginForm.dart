@@ -13,6 +13,7 @@ class LoginForm extends StatelessWidget {
 
   void _saveForm(BuildContext context) {
     if (!_formKey.currentState.validate()) return;
+    _formKey.currentState.save();
     BlocProvider.of<LoginBloc>(context).add(LoginButtonPressed(
       username: loginData["username"],
       password: loginData["password"],
@@ -24,16 +25,20 @@ class LoginForm extends StatelessWidget {
     return FormTemplate(
       formKey: _formKey,
       formFields: [
+        //TODO: kiszedni az előre berakott értékeket
         TextFormField(
           decoration: InputDecoration(labelText: "Felhasználónév"),
-          onSaved: (value) => loginData["username"] = value,
+          onSaved: (value) => loginData["username"] = value.trim(),
+          textInputAction: TextInputAction.next,
+          initialValue: "admin",
         ),
         TextFormField(
           decoration: InputDecoration(labelText: "Jelszó"),
           //validator: (value) =>
           //  value.length < 5 ? "A megadott jelszó túl rövid" : null,
-          onSaved: (value) => loginData["password"] = value,
+          onSaved: (value) => loginData["password"] = value.trim(),
           obscureText: true,
+          initialValue: "FakeAdminPassword",
         ),
       ],
       submitText: "Bejelentkezés",

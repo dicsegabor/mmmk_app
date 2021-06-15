@@ -3,7 +3,7 @@ import 'package:mmmk_app/screen/screenTemplate.dart';
 
 import '../model/interfaces/searchable.dart';
 
-typedef ListItemBuilder = Widget Function(Searchable data);
+typedef ListItemBuilder = Widget Function(Searchable data, Key key);
 
 class SearchableListScreen extends StatefulWidget {
   final String title;
@@ -82,8 +82,9 @@ class _SearchableListScreenState extends State<SearchableListScreen> {
           height: MediaQuery.of(context).size.height,
           child: ListView.builder(
             itemCount: _filteredList.length,
-            itemBuilder: (context, index) =>
-                widget.listItemBuilder(_filteredList[index]),
+            itemBuilder: (context, index) => widget.listItemBuilder(
+                _filteredList[index],
+                ValueKey(_filteredList[index].toString())),
           ),
         ),
       ),

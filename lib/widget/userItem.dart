@@ -7,7 +7,7 @@ import 'package:mmmk_app/widget/expandingListItem.dart';
 class UserItem extends StatelessWidget {
   final User _user;
 
-  const UserItem(this._user);
+  const UserItem(this._user, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

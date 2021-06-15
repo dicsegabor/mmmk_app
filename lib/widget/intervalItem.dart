@@ -11,7 +11,9 @@ class IntervalItem extends StatelessWidget {
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Text("asd"),
+        child: reservation == null
+            ? Text("asd")
+            : Text(reservation.timeRange.start.toString()),
       ),
     );
   }

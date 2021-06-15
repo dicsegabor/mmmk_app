@@ -14,9 +14,12 @@ class BandsScreen extends StatelessWidget {
     return SearchableListScreen(
       title: "Zenekarok",
       list: Provider.of<Repository>(context).bands,
-      listItemBuilder: (data) => BandItem(data),
-      onRefresh: () => Provider.of<Repository>(context, listen: false).fetchAndSetBands(
-          BlocProvider.of<AuthenticationBloc>(context, listen: false).currentUser.token),
+      listItemBuilder: (data, key) => BandItem(data, key: key),
+      onRefresh: () => Provider.of<Repository>(context, listen: false)
+          .fetchAndSetBands(
+              BlocProvider.of<AuthenticationBloc>(context, listen: false)
+                  .currentUser
+                  .token),
     );
   }
 }

@@ -1,11 +1,11 @@
 List<dynamic> reservationsList = [
   {
     "url": "http://127.0.0.1:8000/api/v1/reservations/36/",
-    "start": "2021-02-26T09:30:00+01:00",
-    "end": "2021-02-26T15:00:00+01:00",
+    "start": DateTime.now().toIso8601String(),
+    "end": DateTime.now().add(Duration(hours: 1)).toIso8601String(),
     "reservation_type": "USER",
-    "title": "Test Test (admin)",
-    "color": "green",
+    "title": "Dicse Gábor",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -16,7 +16,7 @@ List<dynamic> reservationsList = [
     "end": "2021-03-12T14:30:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -27,7 +27,7 @@ List<dynamic> reservationsList = [
     "end": "2022-05-19T16:00:00+02:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -38,7 +38,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-27T14:30:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -49,7 +49,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-25T13:30:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -60,7 +60,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-21T13:30:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -71,7 +71,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-19T10:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -82,7 +82,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-19T23:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -93,7 +93,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T12:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -104,7 +104,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T15:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -115,7 +115,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T16:30:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -126,7 +126,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T12:30:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -137,7 +137,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T17:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -148,7 +148,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T17:30:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -159,7 +159,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T09:30:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -170,7 +170,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T10:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -181,7 +181,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T23:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -192,7 +192,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-20T18:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""
@@ -203,7 +203,7 @@ List<dynamic> reservationsList = [
     "end": "2021-02-24T21:00:00+01:00",
     "reservation_type": "USER",
     "title": "Test Test (admin)",
-    "color": "green",
+    "color": "00ff00",
     "owner_id": 1,
     "owner_type": 13,
     "note": ""

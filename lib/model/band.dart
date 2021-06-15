@@ -1,6 +1,5 @@
 
 
-import 'package:mmmk_app/functions/generalFunctions.dart';
 
 import 'interfaces/searchable.dart';
 

@@ -7,8 +7,10 @@ import 'package:mmmk_app/model/user.dart';
 
 Future<List<Band>> fetchBands(String token, List<User> users) async {
   try {
-    final http.Response response = await http.get(bandsUrl + token);
-    List<dynamic> extractedDataList = json.decode(utf8.decode(response.bodyBytes));
+    final http.Response response =
+        await http.get(bandsUrl, headers: {"Authorization": token});
+    List<dynamic> extractedDataList =
+        json.decode(utf8.decode(response.bodyBytes));
     return extractedDataList.map((e) {
       Band band = Band.fromMap(e);
       // TODO: ezt esetleg megfixálni a jövőben

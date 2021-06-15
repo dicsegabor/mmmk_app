@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:mmmk_app/bloc/authentication/authentication_bloc.dart';
 import 'package:mmmk_app/bloc/login/login_bloc.dart';
 import 'package:mmmk_app/screen/bandsScreen.dart';
@@ -11,12 +12,14 @@ import 'package:mmmk_app/screen/userDataScreen.dart';
 import 'package:mmmk_app/screen/usersScreen.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  await initializeDateFormatting();
 
   runApp(
     BlocProvider(
@@ -29,6 +32,7 @@ void main() {
 ThemeData generalTheme = ThemeData(
   primarySwatch: Colors.teal,
   brightness: Brightness.dark,
+  accentColor: Colors.teal,
   textTheme: TextTheme(
     headline1: TextStyle(
       fontSize: 26,
@@ -62,9 +66,7 @@ class MyApp extends StatelessWidget {
       value: BlocProvider.of<AuthenticationBloc>(context).repository,
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: generalTheme.copyWith(brightness: Brightness.light),
-        darkTheme: generalTheme.copyWith(brightness: Brightness.dark),
-        themeMode: ThemeMode.system,
+        theme: generalTheme,
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (BuildContext context, state) {
             if (state is AuthenticationUninitialized ||
