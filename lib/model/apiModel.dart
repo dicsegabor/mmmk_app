@@ -1,14 +1,19 @@
-class ApiUser{
+import 'package:http/http.dart' as http;
+import 'package:mmmk_app/api/UserAgentClient.dart';
+import 'package:mmmk_app/model/user.dart';
+
+class ApiUser {
   String _userName;
   Token _token;
+  UserAgentClient _userAgentClient;
 
   String get username => _userName;
 
-  String get token => _token.code;
+  UserAgentClient get userAgentClient => _userAgentClient;
 
-  void validateHttpRequest() {}
-
-  ApiUser(this._userName, this._token);
+  ApiUser(this._userName, this._token) {
+    _userAgentClient = UserAgentClient(_token.code, http.Client());
+  }
 }
 
 class Token {

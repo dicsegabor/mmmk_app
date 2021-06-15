@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'package:mmmk_app/api/UserAgentClient.dart';
 import 'package:mmmk_app/api/bandsApi.dart';
 import 'package:mmmk_app/api/reservationsApi.dart';
 import 'package:mmmk_app/api/usersApi.dart';
@@ -33,25 +35,26 @@ class Repository with ChangeNotifier {
 
   //TODO: hibakezelés
   //TODO: remove
-  Future<void> fetchAndSetAllData(String token) async {
+  Future<void> fetchAndSetAllData(UserAgentClient userAgentClient) async {
     try {
-      _users = await fetchUsers(token).timeout(Duration(seconds: 5));
-      _bands = await fetchBands(token, _users).timeout(Duration(seconds: 5));
-      _reservations =
-          await fetchReservations(token).timeout(Duration(seconds: 5));
+      _users = await fetchUsers(userAgentClient).timeout(Duration(seconds: 5));
+      _bands = await fetchBands(userAgentClient, _users)
+          .timeout(Duration(seconds: 5));
+      _reservations = await fetchReservations(userAgentClient)
+          .timeout(Duration(seconds: 5));
     } catch (error) {
       throw error;
     }
     notifyListeners();
   }
 
-  Future<void> fetchAndSetUsers(String token) async {
-    _users = await fetchUsers(token);
+  Future<void> fetchAndSetUsers(UserAgentClient userAgentClient) async {
+    _users = await fetchUsers(userAgentClient);
     notifyListeners();
   }
 
-  Future<void> fetchAndSetBands(String token) async {
-    _bands = await fetchBands(token, _users);
+  Future<void> fetchAndSetBands(UserAgentClient userAgentClient) async {
+    _bands = await fetchBands(userAgentClient, _users);
     notifyListeners();
   }
 }

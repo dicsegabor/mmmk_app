@@ -19,7 +19,7 @@ class BandsScreen extends StatelessWidget {
           .fetchAndSetBands(
               BlocProvider.of<AuthenticationBloc>(context, listen: false)
                   .currentUser
-                  .token),
+                  .userAgentClient),
     );
   }
 }

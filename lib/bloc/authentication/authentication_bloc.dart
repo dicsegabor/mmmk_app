@@ -31,7 +31,7 @@ class AuthenticationBloc
       try {
         _currentUser = ApiUser("admin", Token(event.token, Duration(hours: 1)));
         await _repository
-            .fetchAndSetAllData(_currentUser.token)
+            .fetchAndSetAllData(_currentUser.userAgentClient)
             .timeout(Duration(seconds: 5));
         yield AuthenticationAuthenticated();
       } catch (error) {

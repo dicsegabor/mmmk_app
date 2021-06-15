@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:mmmk_app/api/UserAgentClient.dart';
 import 'package:mmmk_app/api/apiUrls.dart';
 import 'package:mmmk_app/model/user.dart';
 
-Future<List<User>> fetchUsers(String token) async {
+Future<List<User>> fetchUsers(UserAgentClient userAgentClient) async {
   try {
-    final http.Response response =
-        await http.get(usersUrl, headers: {"Authorization": token});
+    final http.Response response = await userAgentClient.get(usersUrl);
     if (response.statusCode != 200)
       throw HttpException(json.decode(utf8.decode(response.bodyBytes)));
     List<dynamic> extractedDataList =

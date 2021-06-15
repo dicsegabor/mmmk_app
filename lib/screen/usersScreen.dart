@@ -19,7 +19,7 @@ class UsersScreen extends StatelessWidget {
           .fetchAndSetUsers(
               BlocProvider.of<AuthenticationBloc>(context, listen: false)
                   .currentUser
-                  .token),
+                  .userAgentClient),
     );
   }
 }

@@ -5,12 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:mmmk_app/api/apiUrls.dart';
 import 'package:mmmk_app/model/reservation.dart';
 
-Future<Map<int, List<Reservation>>> fetchReservations(String token) async {
+import 'UserAgentClient.dart';
+
+Future<Map<int, List<Reservation>>> fetchReservations(
+    UserAgentClient userAgentClient) async {
   Map<int, List<Reservation>> reservationsByDay = {};
 
   try {
-    final http.Response response =
-        await http.get(reservationsUrl, headers: {"Authorization": token});
+    final http.Response response = await userAgentClient.get(reservationsUrl);
     if (response.statusCode != 200)
       throw HttpException(
           json.decode(utf8.decode(response.bodyBytes))["detail"]);

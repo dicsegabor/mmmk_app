@@ -21,7 +21,9 @@ class EditUserDataForm extends StatelessWidget {
     try {
       //TODO: Patch the user on the server
       Provider.of<Repository>(context).fetchAndSetUsers(
-          BlocProvider.of<AuthenticationBloc>(context).currentUser.token);
+          BlocProvider.of<AuthenticationBloc>(context)
+              .currentUser
+              .userAgentClient);
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

@@ -5,10 +5,12 @@ import 'package:mmmk_app/api/apiUrls.dart';
 import 'package:mmmk_app/model/band.dart';
 import 'package:mmmk_app/model/user.dart';
 
-Future<List<Band>> fetchBands(String token, List<User> users) async {
+import 'UserAgentClient.dart';
+
+Future<List<Band>> fetchBands(
+    UserAgentClient userAgentClient, List<User> users) async {
   try {
-    final http.Response response =
-        await http.get(bandsUrl, headers: {"Authorization": token});
+    final http.Response response = await userAgentClient.get(bandsUrl);
     List<dynamic> extractedDataList =
         json.decode(utf8.decode(response.bodyBytes));
     return extractedDataList.map((e) {
