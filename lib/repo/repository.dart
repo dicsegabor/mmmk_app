@@ -33,8 +33,8 @@ class Repository with ChangeNotifier {
     try {
       _users = await fetchUsers(token).timeout(Duration(seconds: 10));
       _bands = await fetchBands(token, _users).timeout(Duration(seconds: 10));
-      _reservations =
-          await fetchReservations(token).timeout(Duration(seconds: 10));
+      //_reservations =
+      await fetchReservations(token).timeout(Duration(seconds: 10));
     } catch (error) {
       throw error;
     }
