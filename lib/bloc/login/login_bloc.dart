@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -23,8 +24,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final token = await login(event.username, event.password)
             .timeout(Duration(seconds: 10));
         authenticationBloc.add(LoggedIn(user: null, token: "Token $token"));
+      } on HttpException catch (error) {
+        yield LoginFailure(message: error.message);
       } catch (error) {
-        yield LoginFailure(message: error.toString());
+        yield LoginFailure(message: error);
+      } finally {
         yield LoginInitial();
       }
     }

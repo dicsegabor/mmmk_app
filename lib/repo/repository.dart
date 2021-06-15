@@ -24,7 +24,11 @@ class Repository with ChangeNotifier {
   Map<int, List<Reservation>> get reservations => _reservations;
 
   User getUserByUsername(String username) {
-    return _users.firstWhere((element) => element.username == username);
+    try {
+      return _users.firstWhere((element) => element.username == username);
+    } catch (error) {
+      return null;
+    }
   }
 
   //TODO: hibakezelés

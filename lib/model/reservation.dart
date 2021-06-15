@@ -23,8 +23,10 @@ class Reservation {
       start: DateTime.parse(data['start']),
       end: DateTime.parse(data['end']),
     );
-    color = Color(int.parse("88${data['color']}", radix: 16));
-    //admissioner = data['admissioner'];
+    color = Colors.green;
+    //color = Color(int.parse("88${data['color']}", radix: 16));
+    //TODO: A beengedő megjavítása, ha a cémi vélaszol
+    //admissioner = User(username: data['admissioner']);
   }
 
   static int compare(Reservation reservation1, Reservation reservation2) {

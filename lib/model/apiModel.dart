@@ -3,7 +3,10 @@ class ApiUser{
   Token _token;
 
   String get username => _userName;
+
   String get token => _token.code;
+
+  void validateHttpRequest() {}
 
   ApiUser(this._userName, this._token);
 }

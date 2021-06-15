@@ -16,8 +16,12 @@ Future<String> login(String username, String password) async {
         "password": password,
       }),
     );
-    if (response.statusCode != 200)
-      throw HttpException(json.decode(utf8.decode(response.bodyBytes)));
+    if (response.statusCode != 200) {
+      //TODO: Cémivel lebeszélni az exceptionokat, és saját típust írni hozzá.
+      throw HttpException(json
+          .decode(utf8.decode(response.bodyBytes))["non_field_errors"]
+          .toString());
+    }
 
     return json.decode(response.body)["token"];
   } catch (error) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mmmk_app/functions/generalFunctions.dart';
 import 'package:mmmk_app/model/band.dart';
-import 'package:mmmk_app/widget/badDescriptionScreen.dart';
+import 'package:mmmk_app/widget/bandDescriptionScreen.dart';
 import 'package:mmmk_app/widget/expandableDetailList.dart';
 import 'package:mmmk_app/widget/expandingListItem.dart';
 

@@ -81,8 +81,8 @@ class _SearchableListScreenState extends State<SearchableListScreen> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           child: ListView.builder(
-            itemCount: _filteredList.length,
-            itemBuilder: (context, index) => widget.listItemBuilder(
+              itemCount: _filteredList.length,
+              itemBuilder: (context, index) => widget.listItemBuilder(
                     _filteredList[index],
                     ValueKey(DateTime.now()),
                   )),
